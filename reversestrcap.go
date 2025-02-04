@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 )
 
@@ -8,6 +9,9 @@ func main() {
 	args := os.Args
 	if len(args) < 2 {
 		return
+	}
+	for i := 1; i < len(args); i++ {
+		fmt.Println(RevstrCap(args[i]))
 	}
 }
 
@@ -26,7 +30,7 @@ func isLow(c rune) bool {
 
 func Upper(c rune) rune {
 	if isLow(c) {
-		c = c + 32
+		c = c - 32
 	}
 	return c
 }
@@ -55,5 +59,28 @@ func split(s string) []string {
 		res = append(res, result)
 	}
 
+	return res
+}
+
+func RevstrCap(s string) string {
+	words := split(s)
+	var res string
+	for i := 0; i < len(words); i++ {
+		for j := 0; j < len(words[i]); j++ {
+			if j != len(words[i])-1 {
+				if isCap(rune(words[i][j])) {
+					res += string(Lower(rune(words[i][j])))
+				} else {
+					res += string(words[i][j])
+				}
+			} else {
+				if isLow(rune(words[i][j])) {
+					res += string(Upper(rune(words[i][j])))
+				} else {
+					res += string(words[i][j])
+				}
+			}
+		}
+	}
 	return res
 }

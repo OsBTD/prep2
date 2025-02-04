@@ -15,7 +15,6 @@ func main() {
 	}
 }
 
-// incomplete
 func isSpace(c rune) bool {
 	return c == ' '
 }
@@ -74,10 +73,18 @@ func RevstrCap(s string) string {
 					res += string(words[i][j])
 				}
 			} else {
-				if isLow(rune(words[i][j])) {
-					res += string(Upper(rune(words[i][j])))
+				if i != len(words)-1 {
+					if isLow(rune(words[i][j])) {
+						res += string(Upper(rune(words[i][j]))) + " "
+					} else {
+						res += string(words[i][j]) + " "
+					}
 				} else {
-					res += string(words[i][j])
+					if isLow(rune(words[i][j])) {
+						res += string(Upper(rune(words[i][j])))
+					} else {
+						res += string(words[i][j])
+					}
 				}
 			}
 		}
